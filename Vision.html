@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Vision | AI-Powered Visualization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0A0A0A;
+            --secondary: #1A1A1A;
+            --accent: linear-gradient(45deg, #8f31e7, #3b8bff);
+            --text: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .start-now-btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--accent);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-decoration: none; 
+            display: inline-block; 
+        }
+
+        .start-now-btn:hover {
+            background: #3e1069; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+            background: linear-gradient(180deg, rgba(55, 55, 55, 0.6) 0%, rgb(0, 0, 0) 100%);
+            align-items: center; 
+        }
+
+        
+
+        .hero-heading {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards;
+        }
+
+        .hero-subheading {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            transform: translateY(30px);
+            animation: fadeUp 2s forwards;
+        }
+
+        .features {
+            padding: 8rem 5%;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-number {
+            font-size: 3rem;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+
+        .demo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .stats {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--secondary);
+            text-align: center;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s ease;
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.5rem;
+            }
+
+            .card-grid,
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-grid {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-logo">CONCRETE VISION</a>
+        <a href="VR.html" class="start-now-btn">Start Now</a>
+    </nav>
+
+    <section class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="vidu-general-4-2025-02-21T03_12_31Z.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1 class="hero-heading">Visualize Knowledge with AI Power</h1>
+            <p class="hero-subheading">Transform complex concepts into interactive visual experiences</p>
+            <button class="start-now-btn">Learn More</button>
+        </div>
+    </section>
+
+    <section class="features section-hidden">
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-number">01</div>
+                <h3>Dynamic Data Visualization</h3>
+                <p>Convert raw data into interactive charts and 3D models in real-time</p>
+            </div>
+            <div class="card">
+                <div class="card-number">02</div>
+                <h3>Image Generator</h3>
+                <p></p>
+            </div>
+            <div class="card">
+                <div class="card-number">03</div>
+                <h3>Comcept Concrete Presenter</h3>
+                <p></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-grid section-hidden">
+        <div class="demo-item">
+            <img src="demo1.jpg" alt="Visualization example">
+        </div>
+        <div class="demo-item">
+            <img src="demo2.jpg" alt="Data chart">
+        </div>
+        <div class="demo-item">
+            <img src="demo3.jpg" alt="3D model">
+        </div>
+        <div class="demo-item">
+            <img src="demo4.jpg" alt="Collaboration view">
+        </div>
+    </section>
+
+    <section class="stats section-hidden">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">##100K?</div>
+                <p>Visualizations Created</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">##98%?</div>
+                <p>User Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">##9.9?</div>
+                <p>Average Rating</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-hidden">
+        <p>&copy; 2024 Concrete Vision. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-hidden').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
