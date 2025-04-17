@@ -2,7 +2,7 @@
 """
 Stable Diffusion Image Generator API using DreamShaper model
 """
-
+import os
 import base64
 import logging
 from io import BytesIO
