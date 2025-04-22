@@ -1,7 +1,17 @@
 async function generateImage() {
-            const prompt = document.getElementById('prompt').value;
+            /*
+            Original: const prompt = document.getElementById('prompt').value;
+            Problem: Did not match the input field ID provided in the updated version (maybe? IDK if its right first but then you changed the id)
+            Solution: Change the id to the appropriate input field ID
+            */
+            const prompt = document.getElementById('userInput').value;
             const loading = document.getElementById('loading');
-            const resultDiv = document.getElementById('result');
+            /*
+            Original: const resultDiv = document.getElementById('result');
+            Problem: Did not match the input div ID provided in the updated version (maybe? IDK if its right first but then you changed the id)
+            Solution: Change the id to the appropriate div ID
+            */
+            const resultDiv = document.getElementById('output');
             
             if (!prompt) {
                 alert('Please enter a prompt');
@@ -12,7 +22,7 @@ async function generateImage() {
             resultDiv.innerHTML = '';
 
             try {
-                const response = await fetch('https://image-generator.onrender.com/generate', }
+                const response = await fetch('https://image-generator.onrender.com/generate', { //original: } Problem: I think you can see the problem here...
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -47,6 +57,5 @@ async function generateImage() {
                 loading.style.display = 'none';
             }
         }
-    </script>
 
 
